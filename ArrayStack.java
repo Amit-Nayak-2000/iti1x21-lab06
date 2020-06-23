@@ -69,9 +69,17 @@ public class ArrayStack<E> implements Stack<E> {
         return elems.length;
     }
 
+    
+
 
     @SuppressWarnings( "unchecked" )
 
     // Add clear method.
+
+    public void clear(){
+        while(isEmpty() == false){
+            E temp = pop();
+        }
+    }
 
 }

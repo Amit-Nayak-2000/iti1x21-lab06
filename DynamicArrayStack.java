@@ -10,7 +10,14 @@ public class DynamicArrayStack<E> implements Stack<E> {
 
     // Constructor
     public DynamicArrayStack( int capacity ) {
-        // Your code here.
+        if(capacity < DEFAULT_INC){
+            elems = (E[]) new Object[DEFAULT_INC];
+            top = 0;
+        }
+        else{
+            elems = (E[]) new Object[capacity];
+            top = 0;
+        }
     }
 
     // Gets current capacity of the array
@@ -32,20 +39,70 @@ public class DynamicArrayStack<E> implements Stack<E> {
 
     // Removes and returns the top element of this stack
     public E pop() {
-        // Your code here.
+        if((top > DEFAULT_INC && ((getCapacity() - top) == DEFAULT_INC - 1))){
+            E saved = elems[--top];
+            elems[top] = null;
+
+            int decrementNum = getCapacity() - DEFAULT_INC ;;
+            if(decrementNum < DEFAULT_INC){
+                decrementNum = DEFAULT_INC;
+            }
+            E[] temp = (E[]) new Object[decrementNum];
+
+            for(int i = 0; i < (decrementNum); i++){
+                temp[i] = elems[i];
+            }
+
+            elems = (E[]) new Object[decrementNum];
+            for(int i = 0; i < (decrementNum); i++){
+                elems[i] = temp[i];
+            }
+            
+            return saved;
+        }
+        else{
+            E saved = elems[ --top ];
+
+            elems[ top ] = null; 
+
+            return saved;
+
+        }
     }
 
     @SuppressWarnings( "unchecked" )
 
     // Puts the element onto the top of this stack.
     public void push( E element ) {
-        // Your code here.
+        if(top == getCapacity()){
+            E[] temp = (E[]) new Object[getCapacity()];
+
+            for(int i = 0; i < getCapacity(); i++){
+                temp[i] = elems[i];
+            }
+
+            int oldIndex = getCapacity();
+            int topCount = getCapacity() - 1;
+            elems = (E[]) new Object[getCapacity() + DEFAULT_INC];
+            
+
+            for(int i = 0; i < oldIndex; i++){
+                elems[i] = temp[i];
+            }
+
+            elems[top++] = element;
+        }
+        else{
+            elems[top++] = element;
+        }
     }
 
     @SuppressWarnings( "unchecked" )
 
     public void clear() {
-        // Your code here.
+        while(isEmpty() == false){
+            E temp = pop();
+        }
     }
 
 }
