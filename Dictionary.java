@@ -15,36 +15,103 @@ public class Dictionary implements Map<String, Integer> {
     }
 
     public Dictionary() {
-        /* Your code here */
+        elems = new Pair[INITIAL_CAPACITY];
+        count = 0;
     }
 
     @Override
     public void put(String key, Integer value) {
-        /* Your code here */
+        if(count < getCapacity()){
+            elems[count] = new Pair(key, value);
+            count++;
+        }
+        else{
+            increaseCapacity();
+            elems[count] = new Pair(key,value);
+            count++;
+        }
     }
 
     private void increaseCapacity() {
-        /* Your code here.  Use this in put() where necessary. */
+       Pair[] newelems = new Pair[getCapacity() + INCREMENT];
+
+       for(int i = 0; i < getCapacity(); i++){
+           newelems[i] = elems[i];
+       }
+
+       elems = newelems;
     }
 
     @Override
     public boolean contains(String key) {
-        /* Your code here. */
+        boolean result = false;
+
+        for(int i = 0; i < getCount(); i++){
+            if(elems[i].getKey() == key){
+                result = true;
+                break;
+            }
+        }
+
+        return result;
     }
 
     @Override
     public Integer get(String key) {
-        /* Your code here. */
+        int i = getCount() - 1;
+        boolean found = false;
+        while(found == false && i>=0){
+            if(elems[i].getKey().equals(key)){
+                found = true;
+            }
+            else{
+                i--;
+            }
+        }
+
+        return elems[i].getValue();
     }
 
     @Override
     public void replace(String key, Integer value) {
-        /* Your code here. */
+        int i = getCount() - 1;
+        boolean found = false;
+        while(found == false && i>=0){
+            if(elems[i].getKey().equals(key)){
+                found = true;
+            }
+            else{
+                i--;
+            }
+        }
+
+        elems[i].setValue(value);
     }
 
     @Override
     public Integer remove(String key) {
-        /* Your code here. */
+        int i = getCount() - 1;
+        boolean found = false;
+        while(found == false && i>=0){
+            if(elems[i].getKey().equals(key)){
+                found = true;
+            }
+            else{
+                i--;
+            }
+        }
+
+        Integer result =  elems[i].getValue();
+
+        while(i < getCount() - 1){
+            elems[i] = elems[i+1];
+            i++;
+        }
+
+        count--;
+        elems[count] = null;
+
+        return result;
     }
 
     @Override
