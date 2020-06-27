@@ -1,6 +1,6 @@
 /**
  *
- * @author Marcel Turcotte, Université d'Ottawa/University of Ottawa
+ * @author Marcel Turcotte, Universit d'Ottawa/University of Ottawa
  */
 
 public class Balanced {

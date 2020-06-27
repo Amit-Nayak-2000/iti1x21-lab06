@@ -1,8 +1,8 @@
 /**
- * ITI 1521. Introduction à l'informatique II (Hiver 2008).
+ * ITI 1521. Introduction  l'informatique II (Hiver 2008).
  * ITI 1121. Introduction to Computer Science II (Winter 2008).
  *
- * @author Marcel Turcotte, Université d'Ottawa/University of Ottawa
+ * @author Marcel Turcotte, Universit d'Ottawa/University of Ottawa
  */
 
 public class L6Q1 {
